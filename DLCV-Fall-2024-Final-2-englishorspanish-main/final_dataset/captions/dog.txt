@@ -1,0 +1,7 @@
+photo of a <TOK>
+<TOK>
+a <TOK> is in front of a big tree
+a picture of a <TOK> 
+<TOK> is in the forest
+<TOK> is sitting on the chair
+a photo of a dog

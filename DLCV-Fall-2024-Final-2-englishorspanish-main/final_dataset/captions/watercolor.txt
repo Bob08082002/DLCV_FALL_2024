@@ -1,0 +1,4 @@
+photo of a dog in <TOK> style
+A street of Paris in <TOK> style
+<TOK> style of a city view
+

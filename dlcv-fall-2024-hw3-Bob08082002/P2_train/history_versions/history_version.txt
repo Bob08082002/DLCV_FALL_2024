@@ -1,0 +1,98 @@
+----------------------------- version1 -----------------------------
+method: each block get same visual embedding from encoder, and concate with text embeddings from each block
+training epoch: 10
+result: using different images get same results
+
+!!! problem: projection layer require_grad = true, but gradient are 0s!
+x = torch.cat((text_embed, img_embed), dim=1)  # x shape = (BS, K+257, 768)
+....
+text_part = x[:, :K, :]  # text_part.shape = (BS, K, 50257)  # get first K
+
+----------------------------- version2 -----------------------------
+method: only first block concate visual embedding and text embedding, set lora rank = 16, embedding w/o lora
+training epoch: 20
+result: CIDEr ~ 0.93(@beam=2), CLIPScore ~ 0.71(@beam=2)
+
+??? gradient of projection layer are not 0s
+x = torch.cat((img_embed, text_embed), dim=1)  # x shape = (BS, K+257, 768)
+....
+text_part = x[:, -K:, :]  # text_part.shape = (BS, K, 50257)  # get last K
+
+----------------------------- version3  -----------------------------
+method: combine ver1 & ver2, each block get same visual embedding & use torch.cat((img_embed, text_embed), dim=1)=> grad != 0
+        set lora rank = 32, embedding w/ lora
+training epoch: 8
+result: CIDEr ~ 0.79(@beam=5), CLIPScore ~ 0.7(@beam=5)
+
+----------------------------- version4  -----------------------------
+method: same as ver2, but different training steps, first stage train projection layer only, second stage train projection layer & decoder
+        set lora rank = 16, embedding w/o lora, use lora.mark_only_lora_as_trainable(model, bias='lora_only')
+training epoch: 20 + 20
+result: ep3: CIDEr ~ 0.96(@beam=3), CLIPScore ~ 0.713(@beam=3)
+
+
+----------------------------- version5  -----------------------------
+method: same as ver2, but use vit huge
+        set lora rank = 32, embedding w/o lora, use lora.mark_only_lora_as_trainable(model, bias='lora_only')
+training epoch: 6
+result:   CIDEr ~ 0.63(@beam=2), CLIPScore ~ 0.66(@beam=2)
+
+----------------------------- version6  -----------------------------
+method: same as ver4, but using new projection layer(linear(1024, 1024), GELU, linear(1024, 768))
+        set lora rank = 32, embedding w/o lora, use lora.mark_only_lora_as_trainable(model, bias='lora_only')
+        MEDIADLCV: training stage 1 using init lr = 0.005, GTI2: training stage 1 using init lr = 0.0001
+training epoch: 30 + 10
+result: ep3: CIDEr~  70(@beam=3), CLIPScore ~ 69(@beam=3)
+
+----------------------------- version7  -----------------------------
+method: same as ver4(2 training phase), but use "vit_large_patch14_clip_224.openai_ft_in12k_in1k"
+        both use init lr = 0.0001
+training epoch: 20 + 10
+result:  ep9 greedy: CIDEr: 0.8496578478921498 | CLIPScore: 0.7174212646484375
+
+----------------------------- version7-1  -----------------------------
+method: same as ver2, but use "vit_large_patch14_clip_224.openai_ft_in12k_in1k"
+        set lora rank = 16, embedding w/o lora, use lora.mark_only_lora_as_trainable(model, bias='lora_only')
+        use init lr = 0.001
+training epoch: 10
+result:  ep9 greedy: CIDEr: 0.8810416556227934 | CLIPScore: 0.7236404418945312
+         ep9 beam=2: CIDEr: 0.9459706814450679 | CLIPScore: 0.7200126647949219 (ckpt@gti2) 
+
+----------------------------- version7-2  -----------------------------
+method: same as version7-1, but set lora rank = 32, 
+        embedding w/o lora, use lora.mark_only_lora_as_trainable(model, bias='lora_only')
+        use init lr = 0.001
+training epoch: 24
+result:  CIDEr: ~0.90,  CLIPScore ~ 0.7233 (greedy, ep4, train到後面更糟) 
+
+----------------------------- version8  -----------------------------
+method: same as version7-1, but set lora rank = 8, 
+        embedding w/o lora, use lora.mark_only_lora_as_trainable(model, bias='lora_only')
+        use init lr = 0.0003, and use transform of vit model
+training epoch: 30
+result: ep2 greedy CIDEr: 0.7819934797962932 | CLIPScore: 0.7053366088867188
+        ep3 greedy CIDEr: 0.8212583374905675 | CLIPScore: 0.7051821899414062
+
+
+***********************************************************************
+----------------------------- version8-1  -----------------------------
+method: same as version8, but use "vit_large_patch14_clip_224.laion2b"
+        and set lora rank = 16, embedding w/o lora, use lora.mark_only_lora_as_trainable(model, bias='lora_only')
+        use init lr = 0.004, and use train_transform = transforms.Compose([
+                                                                transforms.RandomHorizontalFlip(p=0.5),
+                                                                transforms.RandomResizedCrop((vision_encoder_size, vision_encoder_size), scale=(0.7, 1.0)),
+                                                                transforms.RandomRotation(30),
+                                                                transforms.ToTensor(),
+                                                                transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]) # mean and std of timm model config
+                                                            ])
+training epoch: 10
+result: ep7 greedy CIDEr: 0.9680648947073769 | CLIPScore: 0.7323910522460938
+***********************************************************************
+        
+----------------------------- version9  -----------------------------
+method: same as version7-1, but use "vit_huge_patch14_clip_336.laion2b_ft_in12k_in1k"  (5hr to train an epoch)
+        lora rank = 16, embedding w/o lora, use lora.mark_only_lora_as_trainable(model, bias='lora_only')
+        use init lr = 0.001
+training epoch: 10
+result: ep2 greedy CIDEr: 0.94 | CLIPScore: 0.726
+

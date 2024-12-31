@@ -1,0 +1,3 @@
+<TOK> is sitting at left and a cat is sitting at right
+<TOK> with a cat
+sketch painting of <TOK>

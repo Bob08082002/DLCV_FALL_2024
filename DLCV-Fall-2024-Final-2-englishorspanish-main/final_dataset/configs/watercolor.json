@@ -1,0 +1,7 @@
+[
+    {
+        "instance_prompt": "<TOK>",
+        "instance_data_dir": "final_dataset/concept_image/watercolor",
+        "caption_dir": "final_dataset/captions/watercolor.txt"
+    }
+]

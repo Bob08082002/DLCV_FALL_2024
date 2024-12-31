@@ -1,0 +1,90 @@
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 80.02
+CLIP Text Score: 35.34
+
+=====================================================PASS======================================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 70.80
+CLIP Text Score: 37.50
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+Image source: "David Revoy", text prompt: The streets of Paris in the style of David Revoy.
+Traceback (most recent call last):
+  File "evaluation/grade_hw2_3.py", line 39, in <module>
+    image_scores = calculate_clip_image_scores_folder(prompt_output_folder_path, input_folder_path)
+  File "/home/zhanggenqi/DLCV/HW2/dlcv-fall-2024-hw2-Bob08082002/evaluation/clip_image_score.py", line 79, in calculate_clip_image_scores_folder
+    avg_scores = calculate_clip_scores(input_images, reference_images)
+  File "/home/zhanggenqi/DLCV/HW2/dlcv-fall-2024-hw2-Bob08082002/evaluation/clip_image_score.py", line 28, in calculate_clip_scores
+    processor = CLIPProcessor.from_pretrained("openai/clip-vit-base-patch32")
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/transformers/processing_utils.py", line 186, in from_pretrained
+    args = cls._get_arguments_from_pretrained(pretrained_model_name_or_path, **kwargs)
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/transformers/processing_utils.py", line 230, in _get_arguments_from_pretrained
+    args.append(attribute_class.from_pretrained(pretrained_model_name_or_path, **kwargs))
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/transformers/tokenization_utils_base.py", line 1723, in from_pretrained
+    resolved_vocab_files[file_id] = cached_path(
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/transformers/utils/hub.py", line 282, in cached_path
+    output_path = get_from_cache(
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/transformers/utils/hub.py", line 485, in get_from_cache
+    r = requests.head(url, headers=headers, allow_redirects=False, proxies=proxies, timeout=etag_timeout)
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/requests/api.py", line 100, in head
+    return request("head", url, **kwargs)
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/requests/api.py", line 59, in request
+    return session.request(method=method, url=url, **kwargs)
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/requests/sessions.py", line 589, in request
+    resp = self.send(prep, **send_kwargs)
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/requests/sessions.py", line 703, in send
+    r = adapter.send(request, **kwargs)
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/requests/adapters.py", line 667, in send
+    resp = conn.urlopen(
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/urllib3/connectionpool.py", line 789, in urlopen
+    response = self._make_request(
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/urllib3/connectionpool.py", line 536, in _make_request
+    response = conn.getresponse()
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/site-packages/urllib3/connection.py", line 507, in getresponse
+    httplib_response = super().getresponse()
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/http/client.py", line 1348, in getresponse
+    response.begin()
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/http/client.py", line 316, in begin
+    version, status, reason = self._read_status()
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/http/client.py", line 277, in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/socket.py", line 681, in readinto
+    return self._sock.recv_into(b)
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/ssl.py", line 1274, in recv_into
+    return self.read(nbytes, buffer)
+  File "/home/zhanggenqi/miniconda3/envs/ldm/lib/python3.8/ssl.py", line 1132, in read
+    return self._sslobj.read(len, buffer)
+KeyboardInterrupt
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 80.02
+CLIP Text Score: 35.34
+
+=====================================================PASS======================================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 70.80
+CLIP Text Score: 37.50
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+Image source: "David Revoy", text prompt: The streets of Paris in the style of David Revoy.
+CLIP Image Score: 65.88
+CLIP Text Score: 33.89
+
+=========================================Fail! Baseline is 70.00/30.00=========================================
+
+Image source: "David Revoy", text prompt: Manhattan skyline in the style of David Revoy.
+CLIP Image Score: 66.92
+CLIP Text Score: 32.92
+
+=========================================Fail! Baseline is 70.00/30.00=========================================
+
+You have passed 1/4 cases

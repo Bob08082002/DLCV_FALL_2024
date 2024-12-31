@@ -1,0 +1,16 @@
+P3_train_special_token.ipynb is at stable-diffusion/scripts/
+
+dog: <new1>
+    train 1: lr step size = 150, initial lr = 0.001, initial existing token = "dog", epoch = 1000
+    inference 1: model at epoch 60 pass baseline. >> P3_log
+
+
+david revoy: <new2>
+    train 1: lr step size = 150, initial lr = 0.001, initial existing token = "cartoon", epoch = 1000
+    inference 1: model at epoch 300 close to baseline. >> P3_log
+
+        train 2: lr step size = 250, initial lr = 0.001, initial existing token = trained embedding from train 1, epoch = 500
+        inference 2: model at epoch 130 close to baseline. >> P3_log_fine_tune
+
+            train 3: lr step size = 500, initial lr = 0.001, initial existing token = trained embedding from train 2, epoch = 500
+            inference 3: model at epoch 140 pass baseline. >> P3_log_fine_tune_2

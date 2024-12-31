@@ -1,0 +1,121 @@
+model_v1: 
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v1 --densify_from_iter 1000
+    result:
+        Testing psnr 32.8281672000885 (avg)
+        Testing ssim 0.9607586787349693 (avg)
+
+model_v2:
+    training: 
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v2 --densify_from_iter 100
+    result:
+        Testing psnr 33.68294010162354 (avg)
+        Testing ssim 0.9627453263316926 (avg)
+
+model_v3(baseline):
+    training: 
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v3
+    result:
+        Testing psnr 31.987794589996337 (avg)
+        Testing ssim 0.9549982544113931 (avg)
+
+model_v4:
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v4 --densify_from_iter 100 --percent_dense 0.1
+    result:
+        Testing psnr 36.3776611328125 (avg)
+        Testing ssim 0.9743469774359143 (avg)
+
+model_v5:
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v5 --densify_from_iter 100 --percent_dense 0.2
+    result:
+        Testing psnr 25.526825284957887 (avg)
+        Testing ssim 0.882903474028108 (avg)
+
+model_v6:
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v6 --densify_from_iter 100 --percent_dense 0.1 -w
+    result:
+        Testing psnr 36.03589572906494 (avg)
+        Testing ssim 0.9745259706453411 (avg)
+
+model_v7:
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v7 --densify_from_iter 100 --percent_dense 0.1 -w --densify_until_iter 25000
+    result:
+        Testing psnr 35.457031679153445 (avg)
+        Testing ssim 0.9708490145570892 (avg)
+
+model_v8:
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v8 --densify_from_iter 100 --percent_dense 0.1 -w --densify_until_iter 10000
+    result:
+        Testing psnr 36.42237133979798 (avg)
+        Testing ssim 0.9752929693641462 (avg)
+
+model_v9:
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v9 --densify_from_iter 100 --percent_dense 0.1 -w --densify_until_iter 5000
+    result:
+        Testing psnr 36.652827978134155 (avg)
+        Testing ssim 0.9757831654663811 (avg)
+
+model_v10:
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v10 --densify_from_iter 100 --percent_dense 0.1 -w --densify_until_iter 3000
+    result:
+        Testing psnr 37.34284992218018 (avg)
+        Testing ssim 0.9780180284623864 (avg)
+
+model_v11: 
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v11 --densify_from_iter 100 --percent_dense 0.1 -w --densify_until_iter 1000
+    result:
+        Testing psnr 36.17350249290466 (avg)
+        Testing ssim 0.9709186972816873 (avg)
+
+model_v12: 
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v12 --densify_from_iter 100 --percent_dense 0.1 -w --densify_until_iter 3000 --densification_interval 50
+    result:
+        Testing psnr 36.92752251625061 (avg)
+        Testing ssim 0.9782690965520934 (avg)
+
+model_v13:
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v13 --densify_from_iter 100 --percent_dense 0.1 -w --densify_until_iter 3000 --densification_interval 200
+    result:
+        Testing psnr 37.036684560775754 (avg)
+        Testing ssim 0.9764106535581791 (avg)
+
+model_v14:
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v14 --densify_from_iter 100 --percent_dense 0.1 -w --densify_until_iter 3000 --lambda_dssim 0.4
+    result:
+        Testing psnr 37.643610095977785 (avg)
+        Testing ssim 0.9800260404420288 (avg)
+
+model_v15:
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v15 --densify_from_iter 100 --percent_dense 0.1 -w --densify_until_iter 3000 --lambda_dssim 0.5
+    result:
+        Testing psnr 37.63899884223938 (avg)
+        Testing ssim 0.9803199740841994 (avg)
+
+model_v16:
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_v16 --densify_from_iter 100 --percent_dense 0.1 -w --densify_until_iter 3000 --lambda_dssim 0.5 --iterations 60000
+    result:
+        Testing psnr 38.286922454833984 (avg)
+        Testing ssim 0.9818157712584132 (avg)
+
+
+
+report problem 4(using random initialize points):
+    training:
+        python3 ./gaussian-splatting/train.py -s ./dataset/train -m checkpoint_model/model_report_p3 --densify_from_iter 100 --percent_dense 0.1 -w --densify_until_iter 3000 --lambda_dssim 0.5 --iterations 60000
+    result:
+        Testing psnr 34.27365884780884 (avg)
+        Testing ssim 0.9523976850458468 (avg)
+        

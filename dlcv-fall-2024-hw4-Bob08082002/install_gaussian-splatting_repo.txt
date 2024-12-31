@@ -1,0 +1,14 @@
+1. git clone https://github.com/graphdeco-inria/gaussian-splatting --recursive
+2. cd gaussian-splatting
+3. modify environment.yml: comment submoudles
+4. conda env create --file environment.yml
+5. conda activate gaussian_splatting
+6. conda install -c conda-forge cudatoolkit-dev
+7. pip install submodules/diff-gaussian-rasterization
+8. pip install submodules/simple-knn
+9. pip install submodules/fused-ssim
+
+# for grade.py
+10. pip install scipy==1.7.3
+11. pip install imageio==2.31.2
+12. pip install lpips==0.1.4

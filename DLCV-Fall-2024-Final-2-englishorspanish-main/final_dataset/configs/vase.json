@@ -1,0 +1,8 @@
+[
+    {
+        "instance_prompt": "<TOK>",
+        "instance_data_dir": "final_dataset/concept_image/vase",
+        "caption_dir": "final_dataset/captions/vase.txt",
+        "mask_dir": "final_dataset/mask/vase"
+    }
+]

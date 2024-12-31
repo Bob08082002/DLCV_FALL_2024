@@ -1,0 +1,5 @@
+photo of a <TOK>
+<TOK>
+a <TOK> is in front of a big tree
+<TOK> is in the forest
+a photo of a vase

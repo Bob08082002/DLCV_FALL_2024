@@ -1,0 +1,1 @@
+use wget to get point_cloud.ply at iteration 60000

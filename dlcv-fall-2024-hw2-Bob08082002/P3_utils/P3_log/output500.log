@@ -1,0 +1,28 @@
+
+===============================================start evaluation================================================
+
+Image source: "dog", text prompt: A dog shepherd posing proudly on a hilltop with Mount Fuji in the background.
+CLIP Image Score: 80.63
+CLIP Text Score: 34.74
+
+=====================================================PASS======================================================
+
+Image source: "dog", text prompt: A dog perched on a park bench with the Colosseum looming behind.
+CLIP Image Score: 73.11
+CLIP Text Score: 37.26
+
+=========================================Fail! Baseline is 74.00/35.00=========================================
+
+Image source: "David Revoy", text prompt: The streets of Paris in the style of David Revoy.
+CLIP Image Score: 66.90
+CLIP Text Score: 34.06
+
+=========================================Fail! Baseline is 70.00/30.00=========================================
+
+Image source: "David Revoy", text prompt: Manhattan skyline in the style of David Revoy.
+CLIP Image Score: 62.60
+CLIP Text Score: 33.16
+
+=========================================Fail! Baseline is 70.00/30.00=========================================
+
+You have passed 1/4 cases
